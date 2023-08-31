@@ -22,7 +22,7 @@ import { useState } from "react";
 */
 
 function TodoForm(props) {
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState("");
 
   // const titleError = function () {
@@ -31,19 +31,26 @@ function TodoForm(props) {
   // };
 
   const handelChangeInput = function(event){
+    if (isError) {
+      setIsError(false);
+    }
     setTaskInput(event.target.value);
+    
   }
 
   const handelSubmit = function (event) {
     event.preventDefault();
 
+    // ต้องรู้ว่า user พิมพ์อะไร (อยู่ใน state : taskInput)
 
-
+    if (taskInput.trim() === '') {
+      console.log('Error');
+      setIsError(true);
+      return;
+    }
     //Form-Validation
     //case1 : submit ได้
     //case2 : submit ไม่ได้ => แสดง Error
-
-    console.log("submit");
   };
 
   const handleCancel = function () {
