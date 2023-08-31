@@ -44,26 +44,18 @@ import styles from "./TodoCreate.module.scss";
   ReactState เป็น 1 ใน fn ของ ReactHook
   const [state,setState] = userState(initialState:any)
 
+  เมื่อ state เปลี่ยน FN-Component จะ Re-render
+  Re-render == Code ทั้งหมดใน FN-Component จะ run ใหม่อีกครั้งนึง
 */
 
 
 function TodoCreate() {
         //state    setState
  const [isOpenForm,setIsOpenForm] = useState(false);
- 
-  // let active = false; 
 
-  const handleClick = function (event){
-    // console.log(event); 
-    // active = !active;
-    // console.log('click',active);
-
+  const handleClick = function (){
     setIsOpenForm(!isOpenForm);
-
-    
   };
-
-
 
   return (
     <>
