@@ -1,6 +1,6 @@
-import styles from './TodoForm.module.scss';
-import { Button } from '../Common/Button/Button';
-import { useState } from 'react';
+import styles from "./TodoForm.module.scss";
+import { Button } from "../Common/Button/Button";
+import { useState } from "react";
 
 /* 
   CC-1 : Form Handle
@@ -13,41 +13,70 @@ import { useState } from 'react';
 
 */
 
+/* 
+  props = {
+    textSubmit = string,
+    setIsOpenForm : FN
+  };
+
+*/
+
 function TodoForm(props) {
+  const [isError, setIsError] = useState(true);
+  const [taskInput, setTaskInput] = useState("");
 
-  const [isError,setIsError] = useState(true);
+  // const titleError = function () {
+  //   console.log(isError);
+  //   setIsError(isError);
+  // };
 
-  const titleError = function(){
-    console.log(isError);
-    setIsError(isError);
+  const handelChangeInput = function(event){
+    setTaskInput(event.target.value);
   }
 
-  const handelSubmit = function(event){
+  const handelSubmit = function (event) {
     event.preventDefault();
-    console.log('submit')
-  }
 
-  const handleCancel = function (){
-    console.log('cancle');
-  }
 
+
+    //Form-Validation
+    //case1 : submit ได้
+    //case2 : submit ไม่ได้ => แสดง Error
+
+    console.log("submit");
+  };
+
+  const handleCancel = function () {
+    console.log("cancel");
+    props.setIsOpenForm(false);
+  };
 
   return (
-    <form className={styles.todo__form__container} onSubmit={handelSubmit}>
-      {/*	Body */}
-      <input className={styles.todo__form__input} placeholder='Task Name' />
-
-      {/*Form Footer */}
-      <div className={styles.todo__form__footer}>
-
-        {isError ? <p className={styles.todo__error}>Title is required</p> : null }
-        <div className={styles.todo__form__buttons}>
-
-          <Button text="Cancel" active={false} type="button" onClick={handleCancel}></Button>
-          <Button text={props.textSubmit} active={true} type="submit"></Button>
+    <>
+      <form className={styles.todo__form__container} onSubmit={handelSubmit}>
+        {/*	Body */}
+        <input className={styles.todo__form__input} placeholder="Task Name" onChange={handelChangeInput} value={taskInput}/>
+        {/*Form Footer */}
+        <div className={styles.todo__form__footer}>
+          {isError ? (
+            <p className={styles.todo__error}>Title is required</p>
+          ) : null}
+          <div className={styles.todo__form__buttons}>
+            <Button
+              text="Cancel"
+              active={false}
+              type="button"
+              onClick={handleCancel}
+            ></Button>
+            <Button
+              text={props.textSubmit}
+              active={true}
+              type="submit"
+            ></Button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 
