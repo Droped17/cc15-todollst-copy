@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 import styles from "./TodoForm.module.scss";
 import { Button } from "../Common/Button/Button";
 import { useState } from "react";
@@ -21,7 +23,7 @@ import { useState } from "react";
 
 */
 
-function TodoForm(props) {
+function TodoForm({setIsOpenForm,textSubmit,setTodo,allTodo}) {
   const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState("");
 
@@ -51,11 +53,25 @@ function TodoForm(props) {
     //Form-Validation
     //case1 : submit ได้
     //case2 : submit ไม่ได้ => แสดง Error
+
+    console.log('submit === create new Todo');
+    // create NewTodo
+    // 1- ส่ง request ไปหลังบ้านเพื่อ save ลง database
+    // 2- ทำการ update State ของ AllTodo == React ทำการ Re-render
+    // data = [];
+    // data = [{id:number,task:string,status:boolean,due_date:YYY--MM--DD}]
+
+    const newTodo = {id:nanoid() ,task: taskInput, status: false, due_date: '22'}
+    const newTodoList = [newTodo,...allTodo];
+    
+    setTodo(newTodoList);
+    setIsOpenForm(false);
+    
   };
 
   const handleCancel = function () {
     console.log("cancel");
-    props.setIsOpenForm(false);
+    setIsOpenForm(false);
   };
 
   return (
@@ -76,7 +92,7 @@ function TodoForm(props) {
               onClick={handleCancel}
             ></Button>
             <Button
-              text={props.textSubmit}
+              text={textSubmit}
               active={true}
               type="submit"
             ></Button>

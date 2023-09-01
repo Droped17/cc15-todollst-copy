@@ -4,11 +4,12 @@ import { HiOutlineCheck } from "react-icons/hi";
 import styles from "./TodoItem.module.scss";
 import TodoForm from "./TodoForm";
 
-function TodoItem({task,done,date}){ //วิธี 2 ** Recommend
+function TodoItem({id,task,done,date}){ //วิธี 2 ** Recommend
 
     // const { task, done, date} = props; วิธี 1
 
     const [isOpenEditMode, setIsOpenEditMode] = useState(false);
+    console.log(id);
 
     const handleClickEdit = function () {
       console.log(isOpenEditMode);
