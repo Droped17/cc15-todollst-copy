@@ -23,7 +23,7 @@ import { useState } from "react";
 
 */
 
-function TodoForm({setIsOpenForm,textSubmit,setTodo,allTodo,addTodo}) {
+function TodoForm({setIsOpenForm,textSubmit,addTodo}) {
   const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState("");
 

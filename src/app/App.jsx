@@ -6,29 +6,33 @@ import TodoHeader from '../components/Todo/TodoHeader';
 import TodoCreate from '../components/Todo/TodoCreate';
 import TodoLists from '../components/Todo/TodoLists';
 import { Button } from '../components/Common/Button/Button';
+
 import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
 
 import { useState } from 'react';
 
 function App() {
+  // console.log(dayjs().format('YYYY-MM-DD'));
+
   const data = [
     {
       id: nanoid(),
       task: "Suspendisse potenti.",
       status: false,
-      due_date: "2023-04-26",
+      due_date: dayjs().format('YYYY-MM-DD'),
     },
     {
       id: nanoid(),
       task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
       status: false,
-      due_date: "2023-05-08",
+      due_date: dayjs().format('YYYY-MM-DD'),
     },
     {
       id: nanoid(),
       task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
       status: false,
-      due_date: "2023-04-30",
+      due_date: dayjs().format('YYYY-MM-DD'),
     },
   ];
     // CRUD = Create-Read-Update-Delete
@@ -45,7 +49,7 @@ function App() {
 
         setAllTodo((old) => [newTodo,...old]);
     };
-
+ 
 
   return (
     <div className='todo'>
@@ -58,7 +62,7 @@ function App() {
       <div className='todo__content'>
         <main className='todo__container'>
           <TodoHeader />
-          <TodoCreate addTodo={addTodo} setTodo={setAllTodo} allTodo={allTodo}/>
+          <TodoCreate addTodo={addTodo}/>
           <TodoLists allTodo={allTodo}/>
         </main>
       </div>
