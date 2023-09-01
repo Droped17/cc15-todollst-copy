@@ -49,6 +49,74 @@ function App() {
 
         setAllTodo((old) => [newTodo,...old]);
     };
+
+    
+    const deleteTodo = function (itemId){
+
+      let foundIndex = allTodo.findIndex((todoObj)=> todoObj.id === itemId);
+      console.log(foundIndex);
+
+      //วิธีที่ 1
+      // if (foundIndex !== -1) {
+      //     const newTodoLists = [...allTodo]; //return ตัวที่ถูกลบ 
+      //     newTodoLists.splice(foundIndex,1);
+      //     setAllTodo(newTodoLists);
+      // };
+
+      //วิธีที่ 2
+      // const newTodoLists = allTodo.filter((todoObj) => todoObj.id !== itemId);
+      // setAllTodo(newTodoLists);
+
+      //วิธีที่ 3
+      setAllTodo(old=> old.filter((todoObj) => todoObj.id != itemId));  
+    } 
+
+    const editTodo = function (itemId,newTodo){
+      // console.log(itemId,newTodo);
+
+      // LOGIC
+      // OPTION 1:
+      // let foundTodo = allTodo.find((todo)=> todo.id == itemId);
+      // // console.log(foundTodo);
+      // if (!foundTodo) return;
+
+      // const newTodo = Object.assign({},foundTodo,newTodo);
+      // console.log(newTodo);
+
+      // let foundIndex = allTodo.findIndex((todo) => todo.id === itemId);
+      // if (foundIndex === -1) {
+      //   return;
+      // }
+      // const newTodoList = [...allTodo];
+      // newTodoList.splice(foundIndex,1,newTodo);
+      // setAllTodo(newTodoList);
+
+      // OPTION 2:
+      // const newTodoList = allTodo.map(function(todo){
+      //   if (todo.id != itemId) {
+      //       return todo;
+      //   } else{
+      //     return {...todo,...newTodo};
+      //   }
+      // });
+
+      
+      // setAllTodo(newTodoList);
+
+      // OPTION 3:
+      const newTodoList = allTodo.reduce((acc,todo)=>{
+        if (todo.id !== itemId) {
+          acc.push(todo);
+        }
+        else{
+          acc.push({...todo,...newTodo});
+        }
+        return acc;
+      },[]);
+
+      setAllTodo(newTodoList);
+
+    };
  
 
   return (
@@ -63,7 +131,7 @@ function App() {
         <main className='todo__container'>
           <TodoHeader />
           <TodoCreate addTodo={addTodo}/>
-          <TodoLists allTodo={allTodo}/>
+          <TodoLists allTodo={allTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
         </main>
       </div>
     </div>

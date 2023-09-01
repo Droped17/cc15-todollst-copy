@@ -4,7 +4,7 @@ import { HiOutlineCheck } from "react-icons/hi";
 import styles from "./TodoItem.module.scss";
 import TodoForm from "./TodoForm";
 
-function TodoItem({id,task,done,date}){ //วิธี 2 ** Recommend
+function TodoItem({id,task,done,date,deleteTodo,editTodo}){ //วิธี 2 ** Recommend
 
     // const { task, done, date} = props; วิธี 1
 
@@ -16,16 +16,26 @@ function TodoItem({id,task,done,date}){ //วิธี 2 ** Recommend
   
       setIsOpenEditMode(!isOpenEditMode);
     };
+
+    const handleClickDelete = function (){
+      deleteTodo(id);
+    };
+
+    const toggleStatus = () =>{
+      const newTodoObj = {id,task,date,status:!done};
+      editTodo(id, newTodoObj);
+    };
+
     return (
         <>
             {isOpenEditMode ? (
-          <TodoForm  textSubmit="Edit Task" setIsOpenForm={setIsOpenEditMode}></TodoForm>
+          <TodoForm  textSubmit="Edit Task" setIsOpenForm={setIsOpenEditMode} editTodo={editTodo} oldTodo={{id,task,done,date}}></TodoForm>
         ) : (
           <li className={styles.todo}>
             <div
               className={`${styles.todo__checkbox} ${done ? styles.todo__checkbox__done : ''}`}
             >
-              <HiOutlineCheck className={styles.todo__checkbox__icon} />
+              <HiOutlineCheck className={styles.todo__checkbox__icon} onClick={toggleStatus}/>
             </div>
             <p className={`${styles.todo__task} ${done ? styles.todo__task__done : ''}`}>
               {task}
@@ -35,7 +45,7 @@ function TodoItem({id,task,done,date}){ //วิธี 2 ** Recommend
               <span onClick={handleClickEdit}>
                 <FaPen className={styles.todo__edit} />
               </span>
-              <span>
+              <span onClick={handleClickDelete}>
                 <FaTrashAlt className={styles.todo__delete} />
               </span>
             </div>

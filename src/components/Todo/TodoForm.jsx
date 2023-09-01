@@ -23,9 +23,9 @@ import { useState } from "react";
 
 */
 
-function TodoForm({setIsOpenForm,textSubmit,addTodo}) {
+function TodoForm({setIsOpenForm,textSubmit,addTodo,oldTodo,editTodo}) {
   const [isError, setIsError] = useState(false);
-  const [taskInput, setTaskInput] = useState("");
+  const [taskInput, setTaskInput] = useState(oldTodo?.task || "");
 
   const handelChangeInput = function(event){
     if (isError) {
@@ -39,8 +39,6 @@ function TodoForm({setIsOpenForm,textSubmit,addTodo}) {
     event.preventDefault();
 
     // ต้องรู้ว่า user พิมพ์อะไร (อยู่ใน state : taskInput)
-
-
     // START LOGIC : for create Todo
 
     if (taskInput.trim() === '') {
@@ -66,7 +64,14 @@ function TodoForm({setIsOpenForm,textSubmit,addTodo}) {
     // setTodo(oldState=> [newTodo,...oldState]);
 
     // send TaskInput to addTodo
-    addTodo(taskInput);
+    if (addTodo) {
+      addTodo(taskInput);
+    }
+    else if(oldTodo && editTodo){
+      editTodo(oldTodo.id,{task: taskInput});
+    }
+    
+    
     setIsOpenForm(false);
     
   };

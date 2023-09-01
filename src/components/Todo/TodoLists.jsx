@@ -2,7 +2,7 @@ import TodoItem from "./TodoItem";
 import styles from "./TodoLists.module.scss";
 import { useState } from "react";
 
-function TodoLists({allTodo}) {
+function TodoLists({allTodo,deleteTodo,editTodo}) {
 
   const dataRender = allTodo.map((todoObj) => (
     <TodoItem
@@ -11,6 +11,8 @@ function TodoLists({allTodo}) {
       task={todoObj.task}
       done={todoObj.status}
       date={todoObj.due_date}
+      deleteTodo={deleteTodo}
+      editTodo={editTodo}
     ></TodoItem>
   ));
 
