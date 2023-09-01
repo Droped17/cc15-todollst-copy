@@ -9,10 +9,10 @@ function TodoItem({id,task,done,date}){ //วิธี 2 ** Recommend
     // const { task, done, date} = props; วิธี 1
 
     const [isOpenEditMode, setIsOpenEditMode] = useState(false);
-    console.log(id);
+    // console.log(id);
 
     const handleClickEdit = function () {
-      console.log(isOpenEditMode);
+      // console.log(isOpenEditMode);
   
       setIsOpenEditMode(!isOpenEditMode);
     };

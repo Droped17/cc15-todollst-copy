@@ -49,7 +49,7 @@ import styles from "./TodoCreate.module.scss";
 */
 
 
-function TodoCreate({setTodo,allTodo}) {
+function TodoCreate({setTodo,allTodo,addTodo}) {
         //state    setState
  const [isOpenForm,setIsOpenForm] = useState(false);
 
@@ -60,7 +60,7 @@ function TodoCreate({setTodo,allTodo}) {
   return (
     <>
       {isOpenForm ? (
-        <TodoForm textSubmit="Add Task" setIsOpenForm={setIsOpenForm} setTodo={setTodo} allTodo={allTodo}></TodoForm>
+        <TodoForm textSubmit="Add Task" setIsOpenForm={setIsOpenForm} setTodo={setTodo} allTodo={allTodo} addTodo={addTodo}></TodoForm>
       ) : (
         <div onClick={handleClick} className={styles.todo__create}>
           <div className={styles.todo__create__button}>

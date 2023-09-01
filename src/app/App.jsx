@@ -6,25 +6,26 @@ import TodoHeader from '../components/Todo/TodoHeader';
 import TodoCreate from '../components/Todo/TodoCreate';
 import TodoLists from '../components/Todo/TodoLists';
 import { Button } from '../components/Common/Button/Button';
+import { nanoid } from 'nanoid';
 
 import { useState } from 'react';
 
 function App() {
   const data = [
     {
-      id: 1,
+      id: nanoid(),
       task: "Suspendisse potenti.",
       status: false,
       due_date: "2023-04-26",
     },
     {
-      id: 2,
+      id: nanoid(),
       task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
       status: false,
       due_date: "2023-05-08",
     },
     {
-      id: 3,
+      id: nanoid(),
       task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
       status: false,
       due_date: "2023-04-30",
@@ -32,6 +33,19 @@ function App() {
   ];
     // CRUD = Create-Read-Update-Delete
     const [allTodo,setAllTodo] = useState(data);
+
+
+    const addTodo = function(task){
+        const newTodo = {
+          id: nanoid(),
+          task: task,
+          status: false,
+          due_date: "2023-09-01",
+        };
+
+        setAllTodo((old) => [newTodo,...old]);
+    };
+
 
   return (
     <div className='todo'>
@@ -44,7 +58,7 @@ function App() {
       <div className='todo__content'>
         <main className='todo__container'>
           <TodoHeader />
-          <TodoCreate setTodo={setAllTodo} allTodo={allTodo}/>
+          <TodoCreate addTodo={addTodo} setTodo={setAllTodo} allTodo={allTodo}/>
           <TodoLists allTodo={allTodo}/>
         </main>
       </div>
